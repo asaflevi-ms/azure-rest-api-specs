@@ -35,6 +35,10 @@ union RadiologyInsightsInferenceType {
 
   @doc("Radiology Procedure inference type")
   RadiologyProcedure: "radiologyProcedure",
+
+  @TypeSpec.Versioning.added(ApiVersion.v2024_07_01)
+  @doc("Radiology scoringAndAssessment inference type")
+  ScoringAndAssessment: "scoringAndAssessment",
 }
 
 @doc("Laterality discrepancy type")
@@ -188,4 +192,64 @@ union DiseaseCourseType {
 
   @doc("Seasonal course")
   SeasonalCourse: "seasonalCourse",
+}
+
+/**
+ * enum ScoringAndAssessmentCategory
+{
+  BIRADS,
+  C_RADS_COLONIC_FINDINGS,
+  CAD_RADS,
+  LI_RADS,
+  LUNG_RADS,
+  NI_RADS,
+  O_RADS,
+  PI_RADS,
+  TI_RADS,
+  C_RADS_EXTRACOLONIC_FINDINGS,
+  LIFETIME_BREAST_CANCER_RISK,
+  ASCVD_RISK,
+  MODIFIED_GAIL_MODEL_RISK,
+  TYRER_CUSICK_MODEL_RISK,
+  AGATSTON_SCORE,
+  TEN_YEAR_CHD_RISK,
+  Z_SCORE,
+  T_SCORE,
+  CALCIUM_VOLUME_SCORE,
+  US_LI_RADS_VISUALIZATION_SCORE,
+  US_LI_RADS,
+  CEUS_LI_RADS,
+  TREATMENT_RESPONSE_LI_RADS,
+  O_RADS_MRI,
+  CALCIUM_MASS_SCORE,
+  RISK_OF_MALIGNANCY_INDEX,
+  HNPCC_MUTATION_RISK,
+  ALBERTA_STROKE_PROGRAM_EARLY_CT_SCORE,
+  KELLGREN_LAWRENCE_GRADING_SCALE,
+  TONNIS_CLASSIFICATION,
+  CALCIUM_SCORE_UNSPECIFIED,
+  TEN_YEAR_CHD_RISK_OBSERVED_AGE,
+  TEN_YEAR_CHD_RISK_ARTERIAL_AGE
+}
+ */
+
+enum ScoringAndAssessmentCategory
+{
+  //LUNG_RADS
+  LungRads : "langRads",
+  //PI_RADS
+  PiRads : "piRads",
+  //TI_RADS
+  TiRads : "tiRads",
+  //C_RADS
+  CRads : "cRads",
+  //CAD_RADS
+  CadRads : "cadRads",
+  //LI_RADS
+  LiRads : "liRads",
+  //NI_RADS
+  NiRads : "niRads", 
+  //O_RADS
+  ORads : "oRads",
+  //C_RADS_COLONIC_FINDINGS
 }

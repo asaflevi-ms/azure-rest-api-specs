@@ -5,6 +5,7 @@ import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 import "./model.radiologyinsights.valuesets.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace AzureHealthInsights;
 
@@ -334,3 +335,120 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
   @doc("Communication was acknowledged.")
   wasAcknowledged: boolean;
 }
+
+/**
+ * 
+ * {
+	"ScoringAndAssessmentInference": {
+		"type": "object",
+		"description": "Field category is always filled. Of the others, either field 'value' is filled; or fields 'minimumValue' and/or 'maximumValue' are filled.",
+		"properties": {
+			"category": {
+				"type": "string",
+				"description": "Represents the scoring and assessment category.",
+				"enum": [
+					"BIRADS",
+					"C-RADS COLONIC FINDINGS",
+					"CAD-RADS",
+					"LI-RADS",
+					"LUNG-RADS",
+					"NI-RADS",
+					"O-RADS",
+					"PI-RADS",
+					"TI-RADS",
+					"C-RADS EXTRACOLONIC FINDINGS",
+					"LIFETIME BREAST CANCER RISK",
+					"ASCVD RISK",
+					"MODIFIED GAIL MODEL RISK",
+					"TYRER CUSICK MODEL RISK",
+					"AGATSTON SCORE",
+					"10 YEAR CHD RISK",
+					"Z-SCORE",
+					"T-SCORE",
+					"CALCIUM VOLUME SCORE",
+					"US LI-RADS VISUALIZATION SCORE",
+					"US LI-RADS",
+					"CEUS LI-RADS",
+					"TREATMENT RESPONSE LI-RADS",
+					"O-RADS MRI",
+					"CALCIUM MASS SCORE",
+					"RISK OF MALIGNANCY INDEX",
+					"HNPCC MUTATION RISK",
+					"ALBERTA STROKE PROGRAM EARLY CT SCORE",
+					"KELLGREN-LAWRENCE GRADING SCALE",
+					"TONNIS CLASSIFICATION",
+					"CALCIUM SCORE (UNSPECIFIED)",
+					"10 YEAR CHD RISK (OBSERVED AGE)",
+					"10 YEAR CHD RISK (ARTERIAL AGE)"
+				]
+			},
+			"value": {
+				"$ref": "#/definitions/StringValueWithUnit",
+				"description": "Either this is filled, or both minimumValue and maximumValue are filled."
+			},
+			"minimumValue": {
+				"$ref": "#/definitions/StringValueWithUnit",
+			},
+			"maximumValue": {
+				"$ref": "#/definitions/StringValueWithUnit",
+			}
+		},
+		"allOf": [
+			{
+				"$ref": "#/definitions/RadiologyInsightsInference"
+			}
+		],
+		"required": [
+			"category"
+		],
+		"x-ms-discriminator-value": "scoringAndAssessment"
+	},
+	"StringValueWithUnit": {
+		"type": "object",
+		"description": "the value (which can be numeric but also non-numeric) is required, the unit is not",
+		"properties": {
+			"value": {
+				"type": "string"
+			},
+			"unit": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"category"
+		]
+	}
+}
+ * 
+ */
+
+@added(ApiVersion.v2024_07_01)
+@doc("Scoring and assessment inference.")
+model ScoringAndAssessmentInference extends RadiologyInsightsInference {
+  @doc("Inference type.")
+  kind: RadiologyInsightsInferenceType.ScoringAndAssessment;
+
+  @doc("Represents the scoring and assessment category.")
+  category: ScoringAndAssessmentCategory;
+
+  @doc("Either this is filled, or both minimumValue and maximumValue are filled.")
+  value?: StringValueWithUnit;
+
+  @doc("Minimum value.")
+  minimumValue?: StringValueWithUnit;
+
+  @doc("Maximum value.")
+  maximumValue?: StringValueWithUnit;
+}
+
+
+@added(ApiVersion.v2024_07_01)
+@doc("String value with unit.")
+model StringValueWithUnit {
+  @doc("Value.")
+  value: string;
+
+  @doc("Unit.")
+  unit?: string;
+}
+
